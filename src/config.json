@@ -1,0 +1,11 @@
+{
+  "voicechat": {
+    "defaultConfig": {
+      "bitrate": 64000,
+      "userLimit": 0
+    },
+
+    "main": "1450516107575427176",
+    "border": "1450551376383053976"
+  }
+}
