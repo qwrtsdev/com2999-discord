@@ -12,7 +12,7 @@ import dotenv from "dotenv";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-dotenv.config({ path: '.env.local' });
+dotenv.config({ path: path.resolve(__dirname, '../.env.local') });
 
 interface ClientWithCommands extends Client {
   commands: Collection<string, any>;
@@ -33,7 +33,7 @@ const client = new Client({
             {
                 type: ActivityType.Custom,
                 name: "custom",
-                state: "❓ /help · COM2999",
+                state: "❓ /help · COM",
             },
         ],
     },
@@ -41,7 +41,7 @@ const client = new Client({
 
 client.commands = new Collection();
 
-const foldersPath = path.join(__dirname, 'src', 'commands');
+const foldersPath = path.join(__dirname, 'commands');
 const commandFolders = fs.readdirSync(foldersPath);
 
 for (const folder of commandFolders) {
@@ -69,7 +69,7 @@ for (const folder of commandFolders) {
   }
 }
 
-const eventsPath = path.join(__dirname, 'src', 'events');
+const eventsPath = path.join(__dirname, 'events');
 const eventFiles = fs
   .readdirSync(eventsPath)
   .filter(file => file.endsWith('.ts'));

@@ -1,4 +1,88 @@
 {
+  "roles": {
+    "universities": [
+      {
+        "name": "KMITL",
+        "desc": "King Mongkut's Institute of Technology Ladkrabang",
+        "value": "kmitl",
+        "emoji_id": "1450551032320098446",
+        "role_id": "1450843654439698502"
+      },
+      {
+        "name": "KMUTNB",
+        "desc": "King Mongkut's University of Technology North Bangkok",
+        "value": "kmutnb",
+        "emoji_id": "1450550244575154300",
+        "role_id": "1450843569802973388"
+      },
+      {
+        "name": "KMUTT",
+        "desc": "King Mongkut's University of Technology Thonburi",
+        "value": "kmutt",
+        "emoji_id": "1450549520957046845",
+        "role_id": "1450843714166587666"
+      },
+      {
+        "name": "CU",
+        "desc": "Chulalongkorn University",
+        "value": "cu",
+        "emoji_id": "1450550797816430625",
+        "role_id": "1450843256148463667"
+      },
+      {
+        "name": "TU",
+        "desc": "Thammasat University",
+        "value": "tu",
+        "emoji_id": "1450550655986172086",
+        "role_id": "1450843536156004362"
+      },
+      {
+        "name": "KU",
+        "desc": "Kasetsart University",
+        "value": "ku",
+        "emoji_id": "1450550530106462218",
+        "role_id": "1450843740972253298"
+      }
+    ],
+    "years": [
+      {
+        "name": "Freshmen",
+        "desc": "First year university student",
+        "value": "freshmen",
+        "emoji": "1️⃣",
+        "role_id": "1450843758706036828"
+      },
+      {
+        "name": "Sophomore",
+        "desc": "Second year university student",
+        "value": "sophomore",
+        "emoji": "2️⃣",
+        "role_id": "1450844004148056084"
+      },
+      {
+        "name": "Junior",
+        "desc": "Third year university student",
+        "value": "junior",
+        "emoji": "3️⃣",
+        "role_id": "1450844019197218969"
+      },
+      {
+        "name": "Senior",
+        "desc": "Fourth year university student",
+        "value": "senior",
+        "emoji": "4️⃣",
+        "role_id": "1450843836287815731"
+      },
+      {
+        "name": "Graduated",
+        "desc": "Graduated university student",
+        "value": "graduated",
+        "emoji": "🎓",
+        "role_id": "1450843884480368720"
+      }
+    ]
+  },
+
   "voicechat": {
     "defaultConfig": {
       "bitrate": 64000,
@@ -7,5 +91,9 @@
 
     "main": "1450516107575427176",
     "border": "1450551376383053976"
+  },
+
+  "channels": {
+    "welcome": "1450545760813977650"
   }
 }
