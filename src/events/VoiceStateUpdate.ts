@@ -34,15 +34,14 @@ export default {
             userLimit: config.voicechat.defaultConfig.userLimit,
 
             permissionOverwrites: [
-              {
-                id: newState.member.user.id,
-                allow: ['Connect'],
-                deny: ['CreateInstantInvite'],
-              },
               // {
-              //   id: newState.guild.roles.everyone,
-              //   deny: ['Connect'],
-              // }
+              //   id: newState.member.user.id,
+              //   allow: ['Connect'],
+              // },
+              {
+                id: newState.guild.roles.everyone,
+                deny: ['CreateInstantInvite'],
+              }
             ]
           });
 
