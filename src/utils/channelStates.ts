@@ -1,0 +1,1 @@
+export const channelOwners = new Map<string, string>(); // channelId -> userId

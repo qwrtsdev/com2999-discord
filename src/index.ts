@@ -19,24 +19,14 @@ interface ClientWithCommands extends Client {
 }
 
 const client = new Client({
-    intents: [
-        GatewayIntentBits.Guilds,
-        GatewayIntentBits.GuildMessages,
-        GatewayIntentBits.MessageContent,
-        GatewayIntentBits.GuildMembers,
-        GatewayIntentBits.DirectMessages,
-        GatewayIntentBits.GuildVoiceStates,
-    ],
-
-    presence: {
-        activities: [
-            {
-                type: ActivityType.Custom,
-                name: "custom",
-                state: "❓ /help · COM",
-            },
-        ],
-    },
+  intents: [
+    GatewayIntentBits.Guilds,
+    GatewayIntentBits.GuildMessages,
+    GatewayIntentBits.MessageContent,
+    GatewayIntentBits.GuildMembers,
+    GatewayIntentBits.DirectMessages,
+    GatewayIntentBits.GuildVoiceStates,
+  ]
 }) as ClientWithCommands;
 
 client.commands = new Collection();

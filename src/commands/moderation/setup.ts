@@ -85,7 +85,7 @@ export default {
                     ),
                 )
                 .addTextDisplayComponents(
-                  new TextDisplayBuilder().setContent(`\nเลือกมหาวิทยาลัยตามสถานศึกษาที่คุณอยู่ เพื่อบ่งบอกตัวตนของคุณว่ามาจากที่ไหน!\nระบบจะทำการเปลี่ยนสีของชื่อ พร้อมมอบยศตามมหาวิทยาลัยต่างๆ\n`),
+                  new TextDisplayBuilder().setContent(`## ➡️ **เลือกมหาวิทยาลัย**\nเลือกมหาวิทยาลัยตามสถานศึกษาที่คุณอยู่เพื่อบ่งบอกตัวตนของคุณว่ามาจากที่ไหน\nระบบจะทำการเปลี่ยนสีของชื่อ พร้อมมอบยศตามมหาวิทยาลัยต่างๆ\n`),
                 )
                 .addSeparatorComponents(
                   new SeparatorBuilder()
@@ -131,7 +131,7 @@ export default {
                     ),
                 )
                 .addTextDisplayComponents(
-                  new TextDisplayBuilder().setContent(`\nเลือกชั้นปีที่คุณเรียนอยู่ เพื่อแสดงความเก๋าของคุณ!\nระบบจะทำการมอบยศตามชั้นปีต่างๆ\n`),
+                  new TextDisplayBuilder().setContent(`## ➡️ **เลือกชั้นปีการศึกษา**\nเลือกชั้นปีที่คุณเรียนอยู่ เพื่อแสดงความเก๋าของคุณ!\nระบบจะทำการมอบยศตามชั้นปีต่างๆ\n`),
                 )
                 .addSeparatorComponents(
                   new SeparatorBuilder()

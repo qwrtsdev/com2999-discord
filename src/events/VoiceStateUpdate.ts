@@ -1,7 +1,17 @@
-import { Events, ChannelType, Guild } from "discord.js";
+import { 
+  Events, 
+  ChannelType, 
+  Guild, 
+  TextDisplayBuilder, 
+  ContainerBuilder,
+  MessageFlags,
+  ButtonBuilder,
+  ButtonStyle, 
+  ActionRowBuilder, 
+  type MessageActionRowComponentBuilder,
+} from "discord.js";
 import config from "../config.json" with { type: "json" };
-
-const channelOwners = new Map<string, string>(); // channelId -> userId
+import { channelOwners } from '../utils/channelStates';
 
 function countVoiceChannels(guild: Guild, categoryId: string): number {
   return guild.channels.cache.filter((channel: any) =>
@@ -51,6 +61,28 @@ export default {
           await mainChannel.permissionOverwrites.edit(newState.member!.id, { Connect: false });
 
           await newState.member.voice.setChannel(channel.id);
+
+          const channelComponent = [
+            new ContainerBuilder()
+              .addTextDisplayComponents(
+                new TextDisplayBuilder().setContent(`**⚠️ ขณะนี้ ห้องนี้เป็นของ <@${newState.member.user.id}>** คุณจะไม่สามารถสร้างห้องใหม่ได้ จนกว่าจะปลดการเป็นเจ้าของห้องนี้หรือห้องจะหายไปเนื่องจากไม่มีสมาชิกเหลืออยู่`),
+              ),
+              new ActionRowBuilder<MessageActionRowComponentBuilder>()
+                .addComponents(
+                  new ButtonBuilder()
+                    .setStyle(ButtonStyle.Danger)
+                    .setLabel("ถอนความเป็นเจ้าของ")
+                    .setEmoji({
+                      name: "🔓",
+                    })
+                    .setCustomId("vcconfig_giveaway"),
+                ),
+          ]
+
+          channel.send({
+            components: channelComponent,
+            flags: MessageFlags.IsComponentsV2,
+          });
         } catch (error) {
           console.error("[autoVC - create] error :", error);
         }

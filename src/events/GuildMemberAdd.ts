@@ -1,4 +1,17 @@
-import { Events, AttachmentBuilder } from "discord.js";
+import { 
+  Events, 
+  AttachmentBuilder, 
+  MediaGalleryBuilder, 
+  MediaGalleryItemBuilder, 
+  TextDisplayBuilder, 
+  ButtonBuilder, 
+  ButtonStyle, 
+  ActionRowBuilder, 
+  type MessageActionRowComponentBuilder, 
+  ContainerBuilder,
+  SeparatorBuilder,
+  SeparatorSpacingSize,
+} from "discord.js";
 import { request } from "undici";
 import Canvas from "@napi-rs/canvas";
 import config from "../config.json" with { type: "json" };
@@ -139,12 +152,48 @@ export default {
                 { name: `${member.id}-join-image.png` }
             );
 
-            const unixTime = Math.floor(Date.now() / 1000);
             const channel = member.guild.channels.cache.get(config.channels.welcome);
             await channel.send({
-                content: `👋🏻 <@${member.id}> <t:${unixTime}:f>`,
+                content: `👋🏻 <@${member.id}> ยินดีต้อนรับ!`,
                 files: [attachment],
             });
+
+            const messageFile = await Bun.file("../templates/join-msg.txt").text();
+
+            const dmComponent = [
+              new ContainerBuilder()
+                .addMediaGalleryComponents(
+                  new MediaGalleryBuilder()
+                    .addItems(
+                      new MediaGalleryItemBuilder()
+                          .setURL("https://media.discordapp.net/attachments/1450882991751696494/1451590219915591711/591126506_17866124577521767_1456465835305861206_n.jpg?ex=6946ba3d&is=694568bd&hm=8b4a6ddfa27a9bcfdeb4543cfeda3415a8c5b66a26a0cd76c8495fbde3a54d7a&=&format=webp&width=1215&height=385"),
+                    ),
+                )
+                .addTextDisplayComponents(
+                  new TextDisplayBuilder().setContent(messageFile),
+                )
+                .addSeparatorComponents(new SeparatorBuilder().setSpacing(SeparatorSpacingSize.Large).setDivider(true))
+                .addActionRowComponents(
+                  new ActionRowBuilder<MessageActionRowComponentBuilder>()
+                    .addComponents(
+                      new ButtonBuilder()
+                        .setStyle(ButtonStyle.Link)
+                        .setLabel("ไปที่แชทหลัก")
+                        .setURL("https://discord.com/channels/1450516106161819753/1450516107575427175"),
+                      new ButtonBuilder()
+                        .setStyle(ButtonStyle.Link)
+                        .setLabel("ติดตามบน Instagram")
+                        .setURL("https://www.instagram.com/comsampan.eng/"),
+                      ),
+                ),
+            ]
+
+            try { 
+              await member.user.send({ components: dmComponent, });
+              console.log(`[dm success] to user : ${member.user.tag}`);
+            } catch (error) {
+              console.error("[dm error] error :", error);
+            }
         } catch (error) {
             console.error("[join log] error :", error);
         }
