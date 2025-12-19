@@ -11,6 +11,7 @@ import {
   ContainerBuilder,
   SeparatorBuilder,
   SeparatorSpacingSize,
+  MessageFlags,
 } from "discord.js";
 import { request } from "undici";
 import Canvas from "@napi-rs/canvas";
@@ -158,7 +159,7 @@ export default {
                 files: [attachment],
             });
 
-            const messageFile = await Bun.file("../templates/join-msg.txt").text();
+            const messageFile = await Bun.file(`${import.meta.dir}\\..\\templates\\join-msg.txt`).text();
 
             const dmComponent = [
               new ContainerBuilder()
@@ -169,9 +170,8 @@ export default {
                           .setURL("https://media.discordapp.net/attachments/1450882991751696494/1451590219915591711/591126506_17866124577521767_1456465835305861206_n.jpg?ex=6946ba3d&is=694568bd&hm=8b4a6ddfa27a9bcfdeb4543cfeda3415a8c5b66a26a0cd76c8495fbde3a54d7a&=&format=webp&width=1215&height=385"),
                     ),
                 )
-                .addTextDisplayComponents(
-                  new TextDisplayBuilder().setContent(messageFile),
-                )
+                .addTextDisplayComponents(new TextDisplayBuilder().setContent(`-# <t:${Math.floor(Date.now() / 1000)}:f>`))
+                .addTextDisplayComponents(new TextDisplayBuilder().setContent(messageFile))
                 .addSeparatorComponents(new SeparatorBuilder().setSpacing(SeparatorSpacingSize.Large).setDivider(true))
                 .addActionRowComponents(
                   new ActionRowBuilder<MessageActionRowComponentBuilder>()
@@ -189,8 +189,10 @@ export default {
             ]
 
             try { 
-              await member.user.send({ components: dmComponent, });
-              console.log(`[dm success] to user : ${member.user.tag}`);
+              await member.user.send({ 
+                components: dmComponent, 
+                MessageFlags: MessageFlags.IsComponentsV2,
+              });
             } catch (error) {
               console.error("[dm error] error :", error);
             }

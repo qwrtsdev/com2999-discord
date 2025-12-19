@@ -23,12 +23,13 @@ export default {
 
     if (interaction.customId.startsWith("vcconfig_")) {
       const configType = interaction.customId.split("_")[1];
+      const channelId = interaction.customId.split("_")[2];
 
       switch (configType) {
         case "giveaway": {
-          const ownerId = channelOwners.get(interactedChannel.id);
+          const ownerId = channelOwners.get(channelId);
 
-          if (ownerId !== interactedUser.id) {
+          if (ownerId !== interaction.user.id) {
             return interaction.reply({
               content: "❌ คุณไม่ใช่เจ้าของห้องนี้",
               MessageFlags: MessageFlags.Ephemeral,
@@ -48,7 +49,7 @@ export default {
                     .setEmoji({
                       name: "🎁",
                     })
-                    .setCustomId("vcconfig_claim"),
+                    .setCustomId(`vcconfig_claim_${interactedChannel.id}`),
                 ),
           ];
 
@@ -57,6 +58,11 @@ export default {
               components: claimComponent,
               flags: MessageFlags.IsComponentsV2,
             });
+
+            await channelOwners.set(interactedChannel.id, "0");
+
+            const mainChannel = await interaction.client.channels.fetch(config.voicechat.main);
+            await mainChannel.permissionOverwrites.delete(interactedUser.id);
 
             await interactedChannel.send({
               content: `🔓 <@${interactedUser.id}> ปลดความเป็นเจ้าของห้องนี้แล้ว!`,
@@ -76,9 +82,9 @@ export default {
         case "claim": {
           const currentOwnerId = channelOwners.get(interactedChannel.id);
 
-          if (!currentOwnerId) {
+          if (currentOwnerId !== "0") {
             return interaction.reply({
-              content: "❌ ห้องนี้ไม่มีข้อมูลเจ้าของ",
+              content: "❌ ห้องนี้มีเจ้าของแล้ว กรุณาลองอีกครั้งหลังปลดล็อค",
               MessageFlags: MessageFlags.Ephemeral,
             });
           }
@@ -94,9 +100,7 @@ export default {
             }
 
             const mainChannel = await interaction.client.channels.fetch(config.voicechat.main);
-            await mainChannel.permissionOverwrites.delete(currentOwnerId);
-
-            channelOwners.set(interactedChannel.id, interactedUser.id);
+            await channelOwners.set(interactedChannel.id, interactedUser.id);
             await mainChannel.permissionOverwrites.edit(interactedUser.id, { Connect: false });
 
             const ownerComponent = [
@@ -112,7 +116,7 @@ export default {
                       .setEmoji({
                         name: "🔓",
                       })
-                      .setCustomId("vcconfig_giveaway"),
+                      .setCustomId(`vcconfig_giveaway_${interactedChannel.id}`),
                   ),
             ];
 

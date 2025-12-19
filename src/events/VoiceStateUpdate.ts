@@ -55,12 +55,11 @@ export default {
             ]
           });
 
-          channelOwners.set(channel.id, newState.member.user.id);
-
           const mainChannel = await newState.client.channels.fetch(config.voicechat.main);
           await mainChannel.permissionOverwrites.edit(newState.member!.id, { Connect: false });
 
           await newState.member.voice.setChannel(channel.id);
+          await channelOwners.set(channel.id, newState.member.user.id);
 
           const channelComponent = [
             new ContainerBuilder()
@@ -75,7 +74,7 @@ export default {
                     .setEmoji({
                       name: "🔓",
                     })
-                    .setCustomId("vcconfig_giveaway"),
+                    .setCustomId(`vcconfig_giveaway_${channel.id}`),
                 ),
           ]
 
@@ -95,7 +94,6 @@ export default {
         if (channelOwners.get(channelId) === userId) {
           try {
             const mainChannel = await oldState.client.channels.fetch(config.voicechat.main);
-            await mainChannel.permissionOverwrites.delete(userId);
             
             channelOwners.delete(channelId);
           } catch (error) {
@@ -108,7 +106,10 @@ export default {
           oldState.channel.members.size === 0
         ) {
           try {
+            const mainChannel = await oldState.client.channels.fetch(config.voicechat.main);
+            
             await oldState.channel.delete();
+            await mainChannel.permissionOverwrites.delete(userId);
           } catch (error) {
             console.error("[autoVC - remove] error :", error);
           }
