@@ -47,35 +47,35 @@
     "years": [
       {
         "name": "Freshmen",
-        "desc": "First year university student",
+        "desc": "นักศึกษาชั้นปีที่ 1",
         "value": "freshmen",
         "emoji": "1️⃣",
         "role_id": "1450843758706036828"
       },
       {
         "name": "Sophomore",
-        "desc": "Second year university student",
+        "desc": "นักศึกษาชั้นปีที่ 2",
         "value": "sophomore",
         "emoji": "2️⃣",
         "role_id": "1450844004148056084"
       },
       {
         "name": "Junior",
-        "desc": "Third year university student",
+        "desc": "นักศึกษาชั้นปีที่ 3",
         "value": "junior",
         "emoji": "3️⃣",
         "role_id": "1450844019197218969"
       },
       {
         "name": "Senior",
-        "desc": "Fourth year university student",
+        "desc": "นักศึกษาชั้นปีที่ 4",
         "value": "senior",
         "emoji": "4️⃣",
         "role_id": "1450843836287815731"
       },
       {
         "name": "Graduated",
-        "desc": "Graduated university student",
+        "desc": "จบการศึกษาแล้ว",
         "value": "graduated",
         "emoji": "🎓",
         "role_id": "1450843884480368720"

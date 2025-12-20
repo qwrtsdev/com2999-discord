@@ -159,7 +159,7 @@ export default {
                 files: [attachment],
             });
 
-            const messageFile = await Bun.file(`${import.meta.dir}\\..\\templates\\join-msg.txt`).text();
+            const messageFile = await Bun.file(path.join(import.meta.dir, "..", "templates", "join-msg.txt")).text();
 
             const dmComponent = [
               new ContainerBuilder()
@@ -191,7 +191,7 @@ export default {
             try { 
               await member.user.send({ 
                 components: dmComponent, 
-                MessageFlags: MessageFlags.IsComponentsV2,
+                flags: MessageFlags.IsComponentsV2,
               });
             } catch (error) {
               console.error("[dm error] error :", error);
