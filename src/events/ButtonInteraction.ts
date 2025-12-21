@@ -32,7 +32,7 @@ export default {
           if (ownerId !== interaction.user.id) {
             return interaction.reply({
               content: "❌ คุณไม่ใช่เจ้าของห้องนี้",
-              MessageFlags: MessageFlags.Ephemeral,
+              flags: MessageFlags.Ephemeral,
             });
           }
           
@@ -72,7 +72,7 @@ export default {
 
             await interaction.reply({
               content: "❌ เกิดข้อผิดพลาดในการยกเลิกความเป็นเจ้าของห้อง",
-              MessageFlags: MessageFlags.Ephemeral,
+              flags: MessageFlags.Ephemeral,
             });
           }
 
@@ -85,7 +85,7 @@ export default {
           if (currentOwnerId !== "0") {
             return interaction.reply({
               content: "❌ ห้องนี้มีเจ้าของแล้ว กรุณาลองอีกครั้งหลังปลดล็อค",
-              MessageFlags: MessageFlags.Ephemeral,
+              flags: MessageFlags.Ephemeral,
             });
           }
 
@@ -95,7 +95,7 @@ export default {
             if (!member.voice.channel || member.voice.channel.id !== interactedChannel.id) {
               return interaction.reply({
                 content: "❌ คุณต้องอยู่ในห้องนี้เพื่อเป็นเจ้าของ",
-                MessageFlags: MessageFlags.Ephemeral,
+                flags: MessageFlags.Ephemeral,
               });
             }
 
@@ -134,7 +134,7 @@ export default {
 
             await interaction.reply({
               content: "❌ เกิดข้อผิดพลาดในการขอเป็นเจ้าของห้อง",
-              MessageFlags: MessageFlags.Ephemeral,
+              flags: MessageFlags.Ephemeral,
             });
           }
 
