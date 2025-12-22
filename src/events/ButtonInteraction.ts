@@ -144,5 +144,38 @@ export default {
         default: break;
       }
     }
+
+    switch (interaction.customId) {
+      case "interest_reset": {
+        try {
+          const allInterestRoles = config.roles.interests;
+          const allInterestRoleIds = allInterestRoles.map((role: any) => role.role_id);
+
+          const rolesToRemove: string[] = [];
+
+          for (const roleId of allInterestRoleIds) {
+            if (interaction.member.roles.cache.has(roleId)) { rolesToRemove.push(roleId); }
+
+            if (rolesToRemove.length > 0) { await interaction.member.roles.remove(rolesToRemove); }
+          }
+
+          await interaction.reply({
+            content: "## 🗑️ **รีเซ็ทความสนใจเรียบร้อยแล้ว**",
+            flags: MessageFlags.Ephemeral
+          });
+        } catch (error) {
+          console.error(error);
+
+          await interaction.reply({
+            content: "❌ ไม่สามารถรีเซ็ทความสนใจได้ กรุณาลองใหม่อีกครั้ง",
+            flags: MessageFlags.Ephemeral
+          });
+      }
+
+        break;
+      }
+
+      default: break;
+    }
   }
 }

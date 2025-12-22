@@ -5,6 +5,8 @@ import {
     TextDisplayBuilder,
     MediaGalleryBuilder,
     MediaGalleryItemBuilder,
+    SeparatorBuilder,
+    SeparatorSpacingSize,
 } from "discord.js";
 
 export default {
@@ -16,27 +18,32 @@ export default {
 
     switch (interaction.customId) {
       case "MessageModal":
-        const message = interaction.fields.getTextInputValue("msg_content");
-        const image = interaction.fields.getUploadedFiles('msg_image') || null;
-        const anonymous = interaction.fields.getStringSelectValues("msg_anonymous");
+        const message: string = interaction.fields.getTextInputValue("msg_content");
+        const image: Map<string, any> | null = interaction.fields.getUploadedFiles('msg_image') || null;
+        const anonymous: string | null = interaction.fields.getStringSelectValues("msg_anonymous") || null;
 
         const container = new ContainerBuilder();
 
         if (image) { 
-          const firstImage = image.entries().next().value;
-          
-          container.addMediaGalleryComponents(
-            new MediaGalleryBuilder()
-              .addItems(
-                new MediaGalleryItemBuilder()
-                  .setURL(firstImage[1].url),
-              ),
-          );
+          const picture = image.entries().next().value;
+
+          if (picture) {
+            container.addMediaGalleryComponents(
+              new MediaGalleryBuilder()
+                .addItems(
+                  new MediaGalleryItemBuilder()
+                    .setURL(picture[1].url),
+                ),
+            );
+          }
         }
 
         container.addTextDisplayComponents(new TextDisplayBuilder().setContent(message));
 
-        if (anonymous === "true") { container.addTextDisplayComponents(new TextDisplayBuilder().setContent(`ประกาศโดย ${interaction.user.username}`)); }
+        if (anonymous && anonymous == "true") { 
+          container.addSeparatorComponents(new SeparatorBuilder().setSpacing(SeparatorSpacingSize.Large).setDivider(true))
+          container.addTextDisplayComponents(new TextDisplayBuilder().setContent(`-# ประกาศโดย <@${interaction.user.id}>`)); 
+        }
 
         const component = [container];
         await interaction.channel.send({

@@ -47,7 +47,7 @@ export default {
       .setStringSelectMenuComponent(
         new StringSelectMenuBuilder()
           .setCustomId("msg_anonymous")
-          .setRequired(true)
+          .setRequired(false)
           .addOptions(
             new StringSelectMenuOptionBuilder()
               .setLabel("ใช่")

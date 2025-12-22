@@ -11,6 +11,8 @@ import {
   StringSelectMenuBuilder,
   SeparatorBuilder, 
   SeparatorSpacingSize,
+  ButtonBuilder,
+  ButtonStyle,
   type MessageActionRowComponentBuilder,
 } from "discord.js";
 import config from "../../config.json" with { type: "json" };
@@ -81,11 +83,14 @@ export default {
                   new MediaGalleryBuilder()
                     .addItems(
                       new MediaGalleryItemBuilder()
-                        .setURL("https://cdn.discordapp.com/attachments/1450882991751696494/1450898265724948695/role.png?ex=694435ce&is=6942e44e&hm=504c045e319d0680b48c517244a04ab7287af55141c86b7f78ad4b70e58fa55c"),
+                        .setURL("https://cdn.discordapp.com/attachments/1450882991751696494/1452713189551898846/banner1.png?ex=694ad016&is=69497e96&hm=68d8b6f2b7663bc0b2f2ea709e312c29e26ce97ca5d61e7cc08f85100c3774ce&"),
                     ),
                 )
                 .addTextDisplayComponents(
-                  new TextDisplayBuilder().setContent(`## ➡️ **เลือกมหาวิทยาลัย**\nเลือกมหาวิทยาลัยตามสถานศึกษาที่คุณอยู่เพื่อบ่งบอกตัวตนของคุณว่ามาจากที่ไหน\nระบบจะทำการเปลี่ยนสีของชื่อ พร้อมมอบยศตามมหาวิทยาลัยต่างๆ\n`),
+                  new TextDisplayBuilder().setContent(`## 🎓 **เลือกมหาวิทยาลัย**\nเลือกมหาวิทยาลัยตามสถานศึกษาที่คุณกำลังศึกษาอยู่ เพื่อบ่งบอกว่าคุณมาจากที่ไหนและเป็นส่วนหนึ่งของสถาบันใด\nระบบจะทำการเปลี่ยนสีชื่อพร้อมมอบยศตามมหาวิทยาลัยต่าง ๆ โดยอัตโนมัติ\n`),
+                )
+                .addTextDisplayComponents(
+                  new TextDisplayBuilder().setContent("-# (คุณสามารถปรับเปลี่ยนหรือลบได้ตลอดเวลา)"),
                 )
                 .addSeparatorComponents(
                   new SeparatorBuilder()
@@ -115,9 +120,6 @@ export default {
                           }),
                         ),
                     ),
-                )
-                .addTextDisplayComponents(
-                  new TextDisplayBuilder().setContent("-# (คุณสามารถปรับเปลี่ยนหรือลบได้ตลอดเวลา)"),
                 ),
             ];
 
@@ -127,11 +129,14 @@ export default {
                   new MediaGalleryBuilder()
                     .addItems(
                       new MediaGalleryItemBuilder()
-                        .setURL("https://cdn.discordapp.com/attachments/1450882991751696494/1450899767365341306/year.png?ex=69443734&is=6942e5b4&hm=7c3dddfe8fd6ace55cafe440abdc70bd8be67f554b8cd074bdb0450f6a885e52"),
+                        .setURL("https://cdn.discordapp.com/attachments/1450882991751696494/1452713188985405470/banner2.png?ex=694ad016&is=69497e96&hm=94df09677a5172c6020fb4867b8326eac926c4e56cfa268e72205ade2855ef9a&"),
                     ),
                 )
                 .addTextDisplayComponents(
-                  new TextDisplayBuilder().setContent(`## ➡️ **เลือกชั้นปีการศึกษา**\nเลือกชั้นปีที่คุณเรียนอยู่ เพื่อแสดงความเก๋าของคุณ!\nระบบจะทำการมอบยศตามชั้นปีต่างๆ\n`),
+                  new TextDisplayBuilder().setContent(`## ⌛ **เลือกชั้นปีการศึกษา**\nเลือกชั้นปีที่คุณกำลังศึกษาอยู่ เพื่อแสดงตัวตนและความเก๋าของคุณในเซิร์ฟเวอร์!\nระบบจะทำการมอบยศตามชั้นปีโดยอัตโนมัติ ช่วยให้สมาชิกคนอื่นรู้จักคุณได้ง่ายขึ้น\n`),
+                )
+                .addTextDisplayComponents(
+                  new TextDisplayBuilder().setContent("-# (คุณสามารถปรับเปลี่ยนหรือลบได้ตลอดเวลา)"),
                 )
                 .addSeparatorComponents(
                   new SeparatorBuilder()
@@ -161,11 +166,65 @@ export default {
                           }),
                         ),
                     ),
+                ),
+            ];
+
+            const interestsComponent = [
+              new ContainerBuilder()
+                .addMediaGalleryComponents(
+                  new MediaGalleryBuilder()
+                    .addItems(
+                      new MediaGalleryItemBuilder()
+                        .setURL("https://cdn.discordapp.com/attachments/1450882991751696494/1452713188566237276/banner3.png?ex=694ad016&is=69497e96&hm=f30b3de4f26a31517020861e33ae5dec0e1164f71dd038367b05e2d97c7e7a2c&"),
+                    ),
+                )
+                .addTextDisplayComponents(
+                  new TextDisplayBuilder().setContent(`## 💖 **เลือกความสนใจของคุณ**\nเลือกสิ่งที่คุณสนใจจากรายการด้านล่าง\nระบบจะทำการมอบยศให้โดยอัตโนมัติ พร้อมปลดล็อกห้องพูดคุยและพื้นที่พิเศษที่เกี่ยวข้อง\nเพื่อให้คุณได้เข้าร่วมและพูดคุยกับสมาชิกที่มีความสนใจเดียวกัน`),
                 )
                 .addTextDisplayComponents(
                   new TextDisplayBuilder().setContent("-# (คุณสามารถปรับเปลี่ยนหรือลบได้ตลอดเวลา)"),
+                )
+                .addSeparatorComponents(
+                  new SeparatorBuilder()
+                    .setSpacing(SeparatorSpacingSize.Large)
+                    .setDivider(true)
+                )
+                .addActionRowComponents(
+                  new ActionRowBuilder<MessageActionRowComponentBuilder>()
+                    .addComponents(
+                      new StringSelectMenuBuilder()
+                        .setCustomId("interest_roles")
+                        .setPlaceholder("เลือกสิ่งที่คุณสนใจ")
+                        .setMaxValues(config.roles.interests.length)
+                        .addOptions(
+                          // {
+                          //   label: "รีเซ็ทสิ่งที่คุณสนใจ",
+                          //   value: "interest_reset",
+                          //   description: "ลบสิ่งที่คุณสนใจออก",
+                          //   emoji: { name: "🗑️" },
+                          // },
+                          config.roles.interests.map((role: any) => {
+                            return {
+                              label: role.name,
+                              value: `interest_${role.value}`,
+                              description: role.desc,
+                              emoji: { name: role.emoji },
+                            };
+                          }),
+                        )
+                    ),
+                )
+                .addActionRowComponents(
+                  new ActionRowBuilder<MessageActionRowComponentBuilder>()
+                    .addComponents(
+                      new ButtonBuilder()
+                        .setStyle(ButtonStyle.Danger)
+                        .setLabel("ลบความสนใจทั้งหมด")
+                        .setEmoji({ name: "🗑️" })
+                        .setCustomId("interest_reset"),
+                    ),
                 ),
-            ];
+            ]
 
             await interaction.channel.send({
               components: uniComponent,
@@ -177,7 +236,11 @@ export default {
               flags: MessageFlags.IsComponentsV2,
             });
 
-            // Update with success message
+            await interaction.channel.send({
+              components: interestsComponent,
+              flags: MessageFlags.IsComponentsV2,
+            });
+
             const successComponent: any = [
               new ContainerBuilder().addTextDisplayComponents(
                 new TextDisplayBuilder().setContent(
