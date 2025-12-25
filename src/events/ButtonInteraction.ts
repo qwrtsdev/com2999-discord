@@ -20,6 +20,7 @@ export default {
     
     const interactedChannel = interaction.channel;
     const interactedUser = interaction.user;
+    const protectedChannels = config.voicechat.protected;
 
     if (interaction.customId.startsWith("vcconfig_")) {
       const configType = interaction.customId.split("_")[1];
@@ -61,7 +62,7 @@ export default {
 
             await channelOwners.set(interactedChannel.id, "0");
 
-            const mainChannel = await interaction.client.channels.fetch(config.voicechat.main);
+            const mainChannel = await interaction.client.channels.fetch(protectedChannels[0]);
             await mainChannel.permissionOverwrites.delete(interactedUser.id);
 
             await interactedChannel.send({
@@ -99,7 +100,7 @@ export default {
               });
             }
 
-            const mainChannel = await interaction.client.channels.fetch(config.voicechat.main);
+            const mainChannel = await interaction.client.channels.fetch(protectedChannels[0]);
             await channelOwners.set(interactedChannel.id, interactedUser.id);
             await mainChannel.permissionOverwrites.edit(interactedUser.id, { Connect: false });
 

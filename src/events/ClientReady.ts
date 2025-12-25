@@ -17,12 +17,17 @@ export default {
         });
 
         const statuses = [
-            "CTRL + C",
-            "CTRL + V",
-            "type /repo for github",
+            "🧡 KMITL",
+            "🧡 KMUTNB",
+            "🧡 KMUTT",
+            "🩷 CHULA",
+            "💚 KASETSART",
+            "❤️ THAMMASAT",
+            "Type /repo for source",
             "vtwi;t",
             "67 Mango Mustard",
-            "Hello World! 🤓"
+            "Hello World! 🤓",
+            "I <3 YOU 3000"
         ];
 
         let currentStatus = 0;

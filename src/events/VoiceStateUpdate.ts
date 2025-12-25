@@ -24,22 +24,18 @@ export default {
   name: Events.VoiceStateUpdate,
   once: false,
   async execute(oldState: any, newState: any) {
-    const protectedChannels = [
-      config.voicechat.main,
-      config.voicechat.border,
-    ];
+    const protectedChannels = config.voicechat.protected;
 
     try {
       if (
-        (!oldState.channelId || oldState.channelId !== config.voicechat.main) && 
-        newState.channelId === config.voicechat.main
+        (!oldState.channelId || oldState.channelId !== protectedChannels[0]) && 
+        newState.channelId === protectedChannels[0]
       ) {
         try {
           const channel = await newState.guild.channels.create({
             name: `🔊・Party #${countVoiceChannels(newState.guild, newState.channel.parentId) - protectedChannels.length + 1}`,
             type: ChannelType.GuildVoice,
             parent: newState.channel.parent,
-            position: countVoiceChannels(newState.guild, newState.channel.parentId) - protectedChannels.length + 1,
             bitrate: config.voicechat.defaultConfig.bitrate,
             userLimit: config.voicechat.defaultConfig.userLimit,
 
@@ -55,7 +51,7 @@ export default {
             ]
           });
 
-          const mainChannel = await newState.client.channels.fetch(config.voicechat.main);
+          const mainChannel = await newState.client.channels.fetch(protectedChannels[0]);
           await mainChannel.permissionOverwrites.edit(newState.member!.id, { Connect: false });
 
           await newState.member.voice.setChannel(channel.id);
@@ -93,7 +89,7 @@ export default {
 
         if (channelOwners.get(channelId) === userId) {
           try {
-            const mainChannel = await oldState.client.channels.fetch(config.voicechat.main);
+            const mainChannel = await oldState.client.channels.fetch(protectedChannels[0]);
             
             channelOwners.delete(channelId);
           } catch (error) {
@@ -106,7 +102,7 @@ export default {
           oldState.channel.members.size === 0
         ) {
           try {
-            const mainChannel = await oldState.client.channels.fetch(config.voicechat.main);
+            const mainChannel = await oldState.client.channels.fetch(protectedChannels[0]);
             
             await oldState.channel.delete();
             await mainChannel.permissionOverwrites.delete(userId);
